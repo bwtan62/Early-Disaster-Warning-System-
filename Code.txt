@@ -1,7 +1,7 @@
 import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
-
+grrg
 
 rainfall_intensity = ctrl.Antecedent(np.arange(0, 101, 1), 'rainfall_intensity')
 river_water_level = ctrl.Antecedent(np.arange(0, 101, 1), 'river_water_level')
