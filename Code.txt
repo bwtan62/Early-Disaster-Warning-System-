@@ -52,4 +52,6 @@ print(train.output)
 
 print(train.output['flood_warning_level'])
 
+print('bruh')
+
 flood_warning_level.view(sim=train)
