@@ -54,4 +54,6 @@ print(train.output['flood_warning_level'])
 
 print('bruh')
 print ('potato')
+
+print("babi")
 flood_warning_level.view(sim=train)
