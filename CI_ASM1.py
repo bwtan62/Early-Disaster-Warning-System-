@@ -90,15 +90,15 @@ train.compute()
 print(train.output)
 
 # to extract one of the outputs
-print(train.output['flood_warning_level'])
+print("Flood Warning Level: ", train.output['flood_warning_level'])
 
 flood_warning_level.view(sim=train)
 
 # Rain Intensity & River Water Level
 # ==========================================================================
 # x, y = np.meshgrid(np.linspace(river_water_level.universe.min(), river_water_level.universe.max(), 100),
-#                    np.linspace(rainfall_intensity.universe.min(), rainfall_intensity.universe.max(), 100))
-# z_flood_warning_level = np.zeros_like(x, dtype=float)
+#                     np.linspace(rainfall_intensity.universe.min(), rainfall_intensity.universe.max(), 100))
+# z = np.zeros_like(x, dtype=float)
 
 
 # for i,r in enumerate(x):
@@ -108,14 +108,14 @@ flood_warning_level.view(sim=train)
 #     try:
 #       train.compute()
 #     except:
-#       z_flood_warning_level[i,j] = float('inf')
-#     z_flood_warning_level[i,j] = train.output['flood_warning_level']
+#       z[i,j] = float('inf')
+#     z[i,j] = train.output['flood_warning_level']
 
 # Rain Intensity & Number of Trees Planted
 # ==========================================================================
 # x, y = np.meshgrid(np.linspace(no_of_trees_planted.universe.min(), no_of_trees_planted.universe.max(), 100),
-#                    np.linspace(rainfall_intensity.universe.min(), rainfall_intensity.universe.max(), 100))
-# z_flood_warning_level = np.zeros_like(x, dtype=float)
+#                     np.linspace(rainfall_intensity.universe.min(), rainfall_intensity.universe.max(), 100))
+# z = np.zeros_like(x, dtype=float)
 
 
 # for i,r in enumerate(x):
@@ -125,14 +125,14 @@ flood_warning_level.view(sim=train)
 #     try:
 #       train.compute()
 #     except:
-#       z_flood_warning_level[i,j] = float('inf')
-#     z_flood_warning_level[i,j] = train.output['flood_warning_level']
+#       z[i,j] = float('inf')
+#     z[i,j] = train.output['flood_warning_level']
 
 # River Water Level & Number of Trees Planted
 # ==========================================================================
 x, y = np.meshgrid(np.linspace(no_of_trees_planted.universe.min(), no_of_trees_planted.universe.max(), 100),
                     np.linspace(river_water_level.universe.min(), river_water_level.universe.max(), 100))
-z_flood_warning_level = np.zeros_like(x, dtype=float)
+z = np.zeros_like(x, dtype=float)
 
 
 for i,r in enumerate(x):
@@ -142,12 +142,11 @@ for i,r in enumerate(x):
     try:
       train.compute()
     except:
-      z_flood_warning_level[i,j] = float('inf')
-    z_flood_warning_level[i,j] = train.output['flood_warning_level']
+      z[i,j] = float('inf')
+    z[i,j] = train.output['flood_warning_level']
    
     
 import matplotlib.pyplot as plt
-# from mpl_toolkits.mplot3d import Axes3D
 
 def plot3d(x,y,z):
   fig = plt.figure()
@@ -161,6 +160,6 @@ def plot3d(x,y,z):
 
   ax.view_init(30, 200)
 
-plot3d(x, y, z_flood_warning_level)
+plot3d(x, y, z)
 
     
