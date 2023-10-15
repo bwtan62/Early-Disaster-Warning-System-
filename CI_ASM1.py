@@ -3,54 +3,55 @@ import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
 
-rainfall_intensity = ctrl.Antecedent(np.arange(0, 101, 1), 'rainfall_intensity')
-river_water_level = ctrl.Antecedent(np.arange(0, 101, 1), 'river_water_level')
-soil_moisture = ctrl.Antecedent(np.arange(0, 101, 1), 'soil_moisture')
+rainfall_intensity = ctrl.Antecedent(np.arange(0, 60, 0.1), 'rainfall_intensity')
+river_water_level = ctrl.Antecedent(np.arange(22, 27, 0.1), 'river_water_level')
+no_of_trees_planted = ctrl.Antecedent(np.arange(0, 500, 1), 'no_of_trees_planted')
 
-flood_warning_level = ctrl.Consequent(np.arange(0, 101, 1), 'flood_warning_level')
+flood_warning_level = ctrl.Consequent(np.arange(0, 100, 1), 'flood_warning_level')
 
+rainfall_intensity['light'] = fuzz.trimf(rainfall_intensity.universe, [0, 0, 15])
+rainfall_intensity['moderate'] = fuzz.trimf(rainfall_intensity.universe, [10, 20, 35])
+rainfall_intensity['heavy'] = fuzz.trimf(rainfall_intensity.universe,[25, 45, 60])
+rainfall_intensity['very heavy'] = fuzz.trapmf(rainfall_intensity.universe, [40, 55, 60, 60])
 
-rainfall_intensity['low'] = fuzz.trimf(rainfall_intensity.universe, [0, 0, 30])
-rainfall_intensity['moderate'] = fuzz.trimf(rainfall_intensity.universe, [20, 50, 80])
-rainfall_intensity['high'] = fuzz.trimf(rainfall_intensity.universe, [70, 100, 100])
+river_water_level['normal'] = fuzz.trimf(river_water_level.universe, [0, 22, 24])
+river_water_level['alert'] = fuzz.trimf(river_water_level.universe, [23, 24, 25])
+river_water_level['warning'] = fuzz.trimf(river_water_level.universe, [24, 25, 26])
+river_water_level['danger'] = fuzz.trapmf(river_water_level.universe, [25, 26, 27, 27])
 
-river_water_level['low'] = fuzz.trimf(river_water_level.universe, [0, 0, 30])
-river_water_level['moderate'] = fuzz.trimf(river_water_level.universe, [20, 50, 80])
-river_water_level['high'] = fuzz.trimf(river_water_level.universe, [70, 100, 100])
+no_of_trees_planted['few'] = fuzz.trimf(no_of_trees_planted.universe, [0, 1, 50])
+no_of_trees_planted['moderate'] = fuzz.trimf(no_of_trees_planted.universe, [51, 125, 250])
+no_of_trees_planted['many'] = fuzz.trapmf(no_of_trees_planted.universe, [251, 375, 500, 500])
 
-soil_moisture['dry'] = fuzz.trimf(soil_moisture.universe, [0, 0, 30])
-soil_moisture['moist'] = fuzz.trimf(soil_moisture.universe, [20, 50, 80])
-soil_moisture['wet'] = fuzz.trimf(soil_moisture.universe, [70, 100, 100])
-
-flood_warning_level['low'] = fuzz.trimf(flood_warning_level.universe, [0, 0, 50])
+flood_warning_level['low'] = fuzz.trimf(flood_warning_level.universe, [1, 25, 50])
 flood_warning_level['moderate'] = fuzz.trimf(flood_warning_level.universe, [20, 50, 80])
 flood_warning_level['high'] = fuzz.trimf(flood_warning_level.universe, [50, 100, 100])
 
 rainfall_intensity.view()
 river_water_level.view()
-soil_moisture.view()
+no_of_trees_planted.view()
 flood_warning_level.view()
 
-rule1 = ctrl.Rule(rainfall_intensity['low'] & river_water_level['low'] & soil_moisture['dry'], flood_warning_level['low'])
-rule2 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['moderate'] & soil_moisture['moist'], flood_warning_level['moderate'])
-rule3 = ctrl.Rule(rainfall_intensity['high'] | river_water_level['high'] | soil_moisture['wet'], flood_warning_level['high'])
+# rule1 = ctrl.Rule(rainfall_intensity['low'] & river_water_level['low'] & no_of_trees['dry'], flood_warning_level['low'])
+# rule2 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['moderate'] & no_of_trees['moist'], flood_warning_level['moderate'])
+# rule3 = ctrl.Rule(rainfall_intensity['high'] | river_water_level['high'] | no_of_trees['wet'], flood_warning_level['high'])
 
-rules = [rule1, rule2, rule3]
-print (rules)
+# rules = [rule1, rule2, rule3]
+# print (rules)
 
-train_ctrl = ctrl.ControlSystem(rules = rules)
+# train_ctrl = ctrl.ControlSystem(rules = rules)
 
-train = ctrl.ControlSystemSimulation(control_system = train_ctrl)
+# train = ctrl.ControlSystemSimulation(control_system = train_ctrl)
 
-train.input['rainfall_intensity'] = 30
-train.input['river_water_level'] = 50
-train.input['soil_moisture'] = 70
+# train.input['rainfall_intensity'] = 30
+# train.input['river_water_level'] = 50
+# train.input['soil_moisture'] = 70
 
-train.compute()
+# train.compute()
 
-print(train.output)
+# print(train.output)
 
-print(train.output['flood_warning_level'])
+# print(train.output['flood_warning_level'])
 
-flood_warning_level.view(sim=train)
+# flood_warning_level.view(sim=train)
     
