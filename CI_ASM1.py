@@ -189,18 +189,6 @@ flood_warning_level.view(sim=train)
 #   fig = plt.figure()
 #   ax = fig.add_subplot(111, projection='3d')
 
-<<<<<<< HEAD
-  ax.contourf(x, y, z, zdir='z', offset=-2.5, cmap='viridis', alpha=0.5)
-  ax.contourf(x, y, z, zdir='x', offset=x.max()*1.5, cmap='viridis', alpha=0.5)
-  ax.contourf(x, y, z, zdir='y', offset=y.max()*1.5, cmap='viridis', alpha=0.5)
-  
-  ax.set_xlabel('Number of Trees Planted')
-  ax.set_ylabel('River Water Level')
-  ax.set_zlabel('Flood Warning Level')
-=======
-#   ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', linewidth=0.4, antialiased=True)
->>>>>>> 35da3f0956c84b7312f84e8183e41b9712e72968
-
 #   ax.contourf(x, y, z, zdir='z', offset=-2.5, cmap='viridis', alpha=0.5)
 #   ax.contourf(x, y, z, zdir='x', offset=x.max()*1.5, cmap='viridis', alpha=0.5)
 #   ax.contourf(x, y, z, zdir='y', offset=y.max()*1.5, cmap='viridis', alpha=0.5)
