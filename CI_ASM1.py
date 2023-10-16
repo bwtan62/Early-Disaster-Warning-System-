@@ -157,6 +157,10 @@ def plot3d(x,y,z):
   ax.contourf(x, y, z, zdir='z', offset=-2.5, cmap='viridis', alpha=0.5)
   ax.contourf(x, y, z, zdir='x', offset=x.max()*1.5, cmap='viridis', alpha=0.5)
   ax.contourf(x, y, z, zdir='y', offset=y.max()*1.5, cmap='viridis', alpha=0.5)
+  
+  ax.set_xlabel('Number of Trees Planted')
+  ax.set_ylabel('River Water Level')
+  ax.set_zlabel('Flood Warning Level')
 
   ax.view_init(30, 200)
 
