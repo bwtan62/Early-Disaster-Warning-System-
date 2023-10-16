@@ -163,3 +163,6 @@ def plot3d(x,y,z):
 plot3d(x, y, z)
 
 babanana
+grgrgr
+rgrrg
+rggrg
