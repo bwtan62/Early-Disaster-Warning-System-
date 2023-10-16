@@ -161,8 +161,3 @@ def plot3d(x,y,z):
   ax.view_init(30, 200)
 
 plot3d(x, y, z)
-
-babanana
-grgrgr
-rgrrg
-rggrg
