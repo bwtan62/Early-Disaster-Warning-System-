@@ -195,9 +195,7 @@ flood_warning_level.view(sim=train)
 #   ax.contourf(x, y, z, zdir='x', offset=x.max()*1.5, cmap='viridis', alpha=0.5)
 #   ax.contourf(x, y, z, zdir='y', offset=y.max()*1.5, cmap='viridis', alpha=0.5)
 
-<<<<<<< HEAD
-plot3d(x, y, z)
-=======
+
 #   ax.view_init(30, 200)
 #   ax.set_title(title)
 
@@ -246,4 +244,4 @@ generate3D(river_water_level, rainfall_intensity, train, "Rain Intensity & River
 generate3D(no_of_trees_planted, rainfall_intensity, train, "Rain Intensity & Number of Trees Planted")
 generate3D(no_of_trees_planted, river_water_level, train, "River Water Level & Number of Trees Planted")
 
->>>>>>> 16b774120247ac1eb619fd07362ac0d34e195dab
+
