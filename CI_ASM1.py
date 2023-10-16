@@ -1,10 +1,11 @@
 import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
+import matplotlib.pyplot as plt
 
 
 rainfall_intensity = ctrl.Antecedent(np.arange(0, 60, 0.1), 'rainfall_intensity')
-river_water_level = ctrl.Antecedent(np.arange(22, 27, 0.1), 'river_water_level')
+river_water_level = ctrl.Antecedent(np.arange(0, 27, 0.1), 'river_water_level')
 no_of_trees_planted = ctrl.Antecedent(np.arange(0, 500, 1), 'no_of_trees_planted')
 
 flood_warning_level = ctrl.Consequent(np.arange(0, 100, 1), 'flood_warning_level')
@@ -14,7 +15,7 @@ rainfall_intensity['moderate'] = fuzz.trimf(rainfall_intensity.universe, [10, 20
 rainfall_intensity['heavy'] = fuzz.trimf(rainfall_intensity.universe,[25, 45, 60])
 rainfall_intensity['very heavy'] = fuzz.trapmf(rainfall_intensity.universe, [40, 55, 60, 60])
 
-river_water_level['normal'] = fuzz.trimf(river_water_level.universe, [0, 22, 24])
+river_water_level['normal'] = fuzz.trimf(river_water_level.universe, [0, 0, 24])
 river_water_level['alert'] = fuzz.trimf(river_water_level.universe, [23, 24, 25])
 river_water_level['warning'] = fuzz.trimf(river_water_level.universe, [24, 25, 26])
 river_water_level['danger'] = fuzz.trapmf(river_water_level.universe, [25, 26, 27, 27])
@@ -130,36 +131,115 @@ flood_warning_level.view(sim=train)
 
 # River Water Level & Number of Trees Planted
 # ==========================================================================
-x, y = np.meshgrid(np.linspace(no_of_trees_planted.universe.min(), no_of_trees_planted.universe.max(), 100),
-                    np.linspace(river_water_level.universe.min(), river_water_level.universe.max(), 100))
-z = np.zeros_like(x, dtype=float)
+# x, y = np.meshgrid(np.linspace(no_of_trees_planted.universe.min(), no_of_trees_planted.universe.max(), 100),
+#                     np.linspace(river_water_level.universe.min(), river_water_level.universe.max(), 100))
+# z = np.zeros_like(x, dtype=float)
 
 
-for i,r in enumerate(x):
-  for j,c in enumerate(r):
-    train.input['no_of_trees_planted'] = x[i,j]
-    train.input['river_water_level'] = y[i,j]
-    try:
-      train.compute()
-    except:
-      z[i,j] = float('inf')
-    z[i,j] = train.output['flood_warning_level']
+# for i,r in enumerate(x):
+#   for j,c in enumerate(r):
+#     train.input['no_of_trees_planted'] = x[i,j]
+#     train.input['river_water_level'] = y[i,j]
+#     try:
+#       train.compute()
+#     except:
+#       z[i,j] = float('inf')
+#     z[i,j] = train.output['flood_warning_level']
    
+
+# def plot3d(x,y,z):
+#   fig = plt.figure()
+#   ax = fig.add_subplot(111, projection='3d')
+
+#   ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', linewidth=0.4, antialiased=True)
+
+#   ax.contourf(x, y, z, zdir='z', offset=-2.5, cmap='viridis', alpha=0.5)
+#   ax.contourf(x, y, z, zdir='x', offset=x.max()*1.5, cmap='viridis', alpha=0.5)
+#   ax.contourf(x, y, z, zdir='y', offset=y.max()*1.5, cmap='viridis', alpha=0.5)
+
+#   ax.view_init(30, 200)
+
+# plot3d(x, y, z)
+
+
+# def generate3D(input1, input2, train):
+#     x, y = np.meshgrid(
+#         np.linspace(input1.universe.min(), input1.universe.max(), 100),
+#         np.linspace(input2.universe.min(), input2.universe.max(), 100)
+#     )
+#     z = np.zeros_like(x, dtype=float)
     
-import matplotlib.pyplot as plt
-
-def plot3d(x,y,z):
-  fig = plt.figure()
-  ax = fig.add_subplot(111, projection='3d')
-
-  ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', linewidth=0.4, antialiased=True)
-
-  ax.contourf(x, y, z, zdir='z', offset=-2.5, cmap='viridis', alpha=0.5)
-  ax.contourf(x, y, z, zdir='x', offset=x.max()*1.5, cmap='viridis', alpha=0.5)
-  ax.contourf(x, y, z, zdir='y', offset=y.max()*1.5, cmap='viridis', alpha=0.5)
-
-  ax.view_init(30, 200)
-
-plot3d(x, y, z)
-
+#     for i,r in enumerate(x):
+#       for j,c in enumerate(r):
+#         train.input[input1.label] = x[i,j]
+#         train.input[input2.label] = y[i,j]
+#         try:
+#           train.compute()
+#         except:
+#           z[i,j] = float('inf')
+#         z[i,j] = train.output['flood_warning_level']
     
+#     return x, y, z
+
+# x1, y1, z1 = generate3D(river_water_level, rainfall_intensity, train)
+# x2, y2, z2 = generate3D(no_of_trees_planted, rainfall_intensity, train)
+# x3, y3, z3 = generate3D(no_of_trees_planted, river_water_level, train)
+
+# def plot3d(x,y,z, title):
+#   fig = plt.figure()
+#   ax = fig.add_subplot(111, projection='3d')
+
+#   ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', linewidth=0.4, antialiased=True)
+
+#   ax.contourf(x, y, z, zdir='z', offset=-2.5, cmap='viridis', alpha=0.5)
+#   ax.contourf(x, y, z, zdir='x', offset=x.max()*1.5, cmap='viridis', alpha=0.5)
+#   ax.contourf(x, y, z, zdir='y', offset=y.max()*1.5, cmap='viridis', alpha=0.5)
+
+#   ax.view_init(30, 200)
+#   ax.set_title(title)
+
+# plot3d(x1, y1, z1, "Rain Intensity & River Water Level")
+# plot3d(x2, y2, z2, "Rain Intensity & Number of Trees Planted")
+# plot3d(x3, y3, z3, "River Water Level & Number of Trees Planted")
+
+# plt.show()
+
+
+def generate3D(input1, input2, train, title):
+    x, y = np.meshgrid(
+        np.linspace(input1.universe.min(), input1.universe.max(), 100),
+        np.linspace(input2.universe.min(), input2.universe.max(), 100)
+    )
+    z = np.zeros_like(x, dtype=float)
+    
+    for i,r in enumerate(x):
+        for j,c in enumerate(r):
+          train.input[input1.label] = x[i,j]
+          train.input[input2.label] = y[i,j]
+          try:
+            train.compute()
+          except:
+            z[i,j] = float('inf')
+          z[i,j] = train.output['flood_warning_level']
+    
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    
+    ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', linewidth=0.4, antialiased=True)
+    ax.contourf(x, y, z, zdir='z', offset=-2.5, cmap='viridis', alpha=0.5)
+    ax.contourf(x, y, z, zdir='x', offset=x.max()*1.5, cmap='viridis', alpha=0.5)
+    ax.contourf(x, y, z, zdir='y', offset=y.max()*1.5, cmap='viridis', alpha=0.5)
+    
+    ax.set_xlabel(input1.label)
+    ax.set_ylabel(input2.label)
+    ax.set_zlabel('flood_warning_level')
+  
+    ax.view_init(30, 200)
+    ax.set_title(title)
+    plt.show()
+
+# Generate and display the 3D plots
+generate3D(river_water_level, rainfall_intensity, train, "Rain Intensity & River Water Level")
+generate3D(no_of_trees_planted, rainfall_intensity, train, "Rain Intensity & Number of Trees Planted")
+generate3D(no_of_trees_planted, river_water_level, train, "River Water Level & Number of Trees Planted")
+
