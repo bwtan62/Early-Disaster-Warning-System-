@@ -33,46 +33,85 @@ river_water_level.view()
 no_of_trees_planted.view()
 flood_warning_level.view()
 
-# Rain Intensity & River Water Level
-rule1 = ctrl.Rule(rainfall_intensity['light'] & river_water_level['normal'], flood_warning_level['low'])
-rule2 = ctrl.Rule(rainfall_intensity['light'] & river_water_level['alert'], flood_warning_level['moderate'])
-rule3 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['normal'], flood_warning_level['low'])
-rule4 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['alert'], flood_warning_level['moderate'])
-rule5 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['warning'], flood_warning_level['moderate'])
-rule6 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['danger'], flood_warning_level['high'])
-rule7 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['warning'], flood_warning_level['moderate'])
-rule8 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['danger'], flood_warning_level['high'])
+# Rain Intensity & River Water Level & Number of Trees Planted (Few)
+rule1 = ctrl.Rule(rainfall_intensity['light'] & river_water_level['normal'] & no_of_trees_planted['few'], flood_warning_level['low'])
+rule2 = ctrl.Rule(rainfall_intensity['light'] & river_water_level['alert'] & no_of_trees_planted['few'], flood_warning_level['moderate'])
+rule3 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['normal'] & no_of_trees_planted['few'], flood_warning_level['moderate'])
+rule4 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['alert'] & no_of_trees_planted['few'], flood_warning_level['moderate'])
+rule5 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['alert'] & no_of_trees_planted['few'], flood_warning_level['moderate'])
+rule6 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['warning'] & no_of_trees_planted['few'], flood_warning_level['high'])
+rule7 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['danger'] & no_of_trees_planted['few'], flood_warning_level['high'])
+rule8 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['alert'] & no_of_trees_planted['few'], flood_warning_level['high'])
+rule9 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['warning'] & no_of_trees_planted['few'], flood_warning_level['high'])
+rule10 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['danger'] & no_of_trees_planted['few'], flood_warning_level['high'])
 
-# Rain Intensity & Number of Trees Planted
-rule9 = ctrl.Rule(rainfall_intensity['light'] & no_of_trees_planted['few'], flood_warning_level['moderate'])
-rule10 = ctrl.Rule(rainfall_intensity['light'] & no_of_trees_planted['moderate'], flood_warning_level['low'])
-rule11 = ctrl.Rule(rainfall_intensity['light'] & no_of_trees_planted['many'], flood_warning_level['low'])
-rule12 = ctrl.Rule(rainfall_intensity['moderate'] & no_of_trees_planted['few'], flood_warning_level['moderate'])
-rule13 = ctrl.Rule(rainfall_intensity['moderate'] & no_of_trees_planted['moderate'], flood_warning_level['low'])
-rule14 = ctrl.Rule(rainfall_intensity['moderate'] & no_of_trees_planted['many'], flood_warning_level['low'])
-rule15 = ctrl.Rule(rainfall_intensity['heavy'] & no_of_trees_planted['few'], flood_warning_level['high'])
-rule16 = ctrl.Rule(rainfall_intensity['heavy'] & no_of_trees_planted['moderate'], flood_warning_level['moderate'])
-rule17 = ctrl.Rule(rainfall_intensity['heavy'] & no_of_trees_planted['many'], flood_warning_level['low'])
-rule18 = ctrl.Rule(rainfall_intensity['very heavy'] & no_of_trees_planted['few'], flood_warning_level['high'])
-rule19 = ctrl.Rule(rainfall_intensity['very heavy'] & no_of_trees_planted['moderate'], flood_warning_level['moderate'])
-rule20 = ctrl.Rule(rainfall_intensity['very heavy'] & no_of_trees_planted['many'], flood_warning_level['moderate'])
+# Rain Intensity & River Water Level & Number of Trees Planted (Moderate)
+rule11 = ctrl.Rule(rainfall_intensity['light'] & river_water_level['normal'] & no_of_trees_planted['moderate'], flood_warning_level['low'])
+rule12 = ctrl.Rule(rainfall_intensity['light'] & river_water_level['alert'] & no_of_trees_planted['moderate'], flood_warning_level['low'])
+rule13 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['normal'] & no_of_trees_planted['moderate'], flood_warning_level['low'])
+rule14 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['alert'] & no_of_trees_planted['moderate'], flood_warning_level['low'])
+rule15 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['alert'] & no_of_trees_planted['moderate'], flood_warning_level['moderate'])
+rule16 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['warning'] & no_of_trees_planted['moderate'], flood_warning_level['moderate'])
+rule17 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['danger'] & no_of_trees_planted['moderate'], flood_warning_level['high'])
+rule18 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['alert'] & no_of_trees_planted['moderate'], flood_warning_level['moderate'])
+rule19 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['warning'] & no_of_trees_planted['moderate'], flood_warning_level['high'])
+rule20 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['danger'] & no_of_trees_planted['moderate'], flood_warning_level['high'])
 
-# River Water Level & Number of Trees Planted
-rule21 = ctrl.Rule(river_water_level['normal'] & no_of_trees_planted['few'], flood_warning_level['low'])
-rule22 = ctrl.Rule(river_water_level['normal'] & no_of_trees_planted['moderate'], flood_warning_level['low'])
-rule23 = ctrl.Rule(river_water_level['normal'] & no_of_trees_planted['many'], flood_warning_level['low'])
-rule24 = ctrl.Rule(river_water_level['alert'] & no_of_trees_planted['few'], flood_warning_level['moderate'])
-rule25 = ctrl.Rule(river_water_level['alert'] & no_of_trees_planted['moderate'], flood_warning_level['moderate'])
-rule26 = ctrl.Rule(river_water_level['alert'] & no_of_trees_planted['many'], flood_warning_level['moderate'])
-rule27 = ctrl.Rule(river_water_level['warning'] & no_of_trees_planted['few'], flood_warning_level['high'])
-rule28 = ctrl.Rule(river_water_level['warning'] & no_of_trees_planted['moderate'], flood_warning_level['high'])
-rule29 = ctrl.Rule(river_water_level['warning'] & no_of_trees_planted['many'], flood_warning_level['high'])
-rule30 = ctrl.Rule(river_water_level['danger'] & no_of_trees_planted['few'], flood_warning_level['high'])
-rule31 = ctrl.Rule(river_water_level['danger'] & no_of_trees_planted['moderate'], flood_warning_level['high'])
-rule32 = ctrl.Rule(river_water_level['danger'] & no_of_trees_planted['many'], flood_warning_level['high'])
+# Rain Intensity & River Water Level & Number of Trees Planted (Many)
+rule21 = ctrl.Rule(rainfall_intensity['light'] & river_water_level['normal'] & no_of_trees_planted['many'], flood_warning_level['low'])
+rule22 = ctrl.Rule(rainfall_intensity['light'] & river_water_level['alert'] & no_of_trees_planted['many'], flood_warning_level['low'])
+rule23 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['normal'] & no_of_trees_planted['many'], flood_warning_level['low'])
+rule24 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['alert'] & no_of_trees_planted['many'], flood_warning_level['low'])
+rule25 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['alert'] & no_of_trees_planted['many'], flood_warning_level['low'])
+rule26 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['warning'] & no_of_trees_planted['many'], flood_warning_level['low'])
+rule27 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['danger'] & no_of_trees_planted['many'], flood_warning_level['moderate'])
+rule28 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['alert'] & no_of_trees_planted['many'], flood_warning_level['low'])
+rule29 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['warning'] & no_of_trees_planted['many'], flood_warning_level['moderate'])
+rule30 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['danger'] & no_of_trees_planted['many'], flood_warning_level['high'])
 
 rules = [rule1, rule2, rule3, rule4, rule5,rule6, rule7, rule8, rule9, rule10, rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19, rule20,
-         rule21, rule22, rule23, rule24, rule25, rule26, rule27, rule28, rule29, rule30, rule31, rule32]
+         rule21, rule22, rule23, rule24, rule25, rule26, rule27, rule28, rule29, rule30]
+
+# # Rain Intensity & River Water Level
+# rule1 = ctrl.Rule(rainfall_intensity['light'] & river_water_level['normal'], flood_warning_level['low'])
+# rule2 = ctrl.Rule(rainfall_intensity['light'] & river_water_level['alert'], flood_warning_level['moderate'])
+# rule3 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['normal'], flood_warning_level['low'])
+# rule4 = ctrl.Rule(rainfall_intensity['moderate'] & river_water_level['alert'], flood_warning_level['moderate'])
+# rule5 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['warning'], flood_warning_level['moderate'])
+# rule6 = ctrl.Rule(rainfall_intensity['heavy'] & river_water_level['danger'], flood_warning_level['high'])
+# rule7 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['warning'], flood_warning_level['moderate'])
+# rule8 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['danger'], flood_warning_level['high'])
+
+# # Rain Intensity & Number of Trees Planted
+# rule9 = ctrl.Rule(rainfall_intensity['light'] & no_of_trees_planted['few'], flood_warning_level['moderate'])
+# rule10 = ctrl.Rule(rainfall_intensity['light'] & no_of_trees_planted['moderate'], flood_warning_level['low'])
+# rule11 = ctrl.Rule(rainfall_intensity['light'] & no_of_trees_planted['many'], flood_warning_level['low'])
+# rule12 = ctrl.Rule(rainfall_intensity['moderate'] & no_of_trees_planted['few'], flood_warning_level['moderate'])
+# rule13 = ctrl.Rule(rainfall_intensity['moderate'] & no_of_trees_planted['moderate'], flood_warning_level['low'])
+# rule14 = ctrl.Rule(rainfall_intensity['moderate'] & no_of_trees_planted['many'], flood_warning_level['low'])
+# rule15 = ctrl.Rule(rainfall_intensity['heavy'] & no_of_trees_planted['few'], flood_warning_level['high'])
+# rule16 = ctrl.Rule(rainfall_intensity['heavy'] & no_of_trees_planted['moderate'], flood_warning_level['moderate'])
+# rule17 = ctrl.Rule(rainfall_intensity['heavy'] & no_of_trees_planted['many'], flood_warning_level['low'])
+# rule18 = ctrl.Rule(rainfall_intensity['very heavy'] & no_of_trees_planted['few'], flood_warning_level['high'])
+# rule19 = ctrl.Rule(rainfall_intensity['very heavy'] & no_of_trees_planted['moderate'], flood_warning_level['moderate'])
+# rule20 = ctrl.Rule(rainfall_intensity['very heavy'] & no_of_trees_planted['many'], flood_warning_level['moderate'])
+
+# # River Water Level & Number of Trees Planted
+# rule21 = ctrl.Rule(river_water_level['normal'] & no_of_trees_planted['few'], flood_warning_level['low'])
+# rule22 = ctrl.Rule(river_water_level['normal'] & no_of_trees_planted['moderate'], flood_warning_level['low'])
+# rule23 = ctrl.Rule(river_water_level['normal'] & no_of_trees_planted['many'], flood_warning_level['low'])
+# rule24 = ctrl.Rule(river_water_level['alert'] & no_of_trees_planted['few'], flood_warning_level['moderate'])
+# rule25 = ctrl.Rule(river_water_level['alert'] & no_of_trees_planted['moderate'], flood_warning_level['moderate'])
+# rule26 = ctrl.Rule(river_water_level['alert'] & no_of_trees_planted['many'], flood_warning_level['moderate'])
+# rule27 = ctrl.Rule(river_water_level['warning'] & no_of_trees_planted['few'], flood_warning_level['high'])
+# rule28 = ctrl.Rule(river_water_level['warning'] & no_of_trees_planted['moderate'], flood_warning_level['high'])
+# rule29 = ctrl.Rule(river_water_level['warning'] & no_of_trees_planted['many'], flood_warning_level['high'])
+# rule30 = ctrl.Rule(river_water_level['danger'] & no_of_trees_planted['few'], flood_warning_level['high'])
+# rule31 = ctrl.Rule(river_water_level['danger'] & no_of_trees_planted['moderate'], flood_warning_level['high'])
+# rule32 = ctrl.Rule(river_water_level['danger'] & no_of_trees_planted['many'], flood_warning_level['high'])
+
+# rules = [rule1, rule2, rule3, rule4, rule5,rule6, rule7, rule8, rule9, rule10, rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19, rule20,
+#          rule21, rule22, rule23, rule24, rule25, rule26, rule27, rule28, rule29, rule30, rule31, rule32]
 
 # Construct the fuzzy control system
 train_ctrl = ctrl.ControlSystem(rules=rules)
@@ -94,6 +133,47 @@ print(train.output)
 print("Flood Warning Level: ", train.output['flood_warning_level'])
 
 flood_warning_level.view(sim=train)
+
+# IDK how to do sorry 
+# def generate3D(input1, input2, input3, train, title):
+#     x, y, z = np.meshgrid(
+#         np.linspace(input1.universe.min(), input1.universe.max(), 100),
+#         np.linspace(input2.universe.min(), input2.universe.max(), 100),
+#         np.linspace(input3.universe.min(), input3.universe.max(), 100)
+#     )
+#     result = np.zeros_like(x, dtype=float)
+    
+#     for i,r in enumerate(x):
+#         for j,c in enumerate(r):
+#           train.input[input1.label] = x[i,j]
+#           train.input[input2.label] = y[i,j]
+#           train.input[input3.label] = z[i,j]
+#           try:
+#             train.compute()
+#           except:
+#             result[i,j] = float('inf')
+#           result[i,j] = train.output['flood_warning_level']
+    
+#     fig = plt.figure()
+#     ax = fig.add_subplot(111, projection='3d')
+    
+#     ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', linewidth=0.4, antialiased=True)
+#     ax.contourf(x, y, z, zdir='z', offset=z.min() - 2.5, cmap='viridis', alpha=0.5)
+#     ax.contourf(x, y, result, zdir='x', offset=x.max() * 1.5, cmap='viridis', alpha=0.5)
+#     ax.contourf(x, y, result, zdir='y', offset=y.max() * 1.5, cmap='viridis', alpha=0.5)
+
+#     ax.set_xlabel(input1.label)
+#     ax.set_ylabel(input2.label)
+#     ax.set_zlabel('flood_warning_level')
+  
+#     ax.view_init(30, 200)
+#     ax.set_title(title)
+#     plt.show()
+    
+# # Generate and display the 3D plots
+# generate3D(river_water_level, rainfall_intensity, no_of_trees_planted, train, "Rain Intensity & River Water Level")
+# generate3D(no_of_trees_planted, rainfall_intensity, no_of_trees_planted, train, "Rain Intensity & Number of Trees Planted")
+# generate3D(no_of_trees_planted, river_water_level, no_of_trees_planted, train, "River Water Level & Number of Trees Planted")
 
 # Rain Intensity & River Water Level
 # ==========================================================================
