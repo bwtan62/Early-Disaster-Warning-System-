@@ -82,9 +82,9 @@ train = ctrl.ControlSystemSimulation(control_system=train_ctrl)
 # train.input['river_water_level'] = int(input("Please enter river water level from 0 to 27m: "))
 # train.input['no_of_trees_planted'] = int(input("Please enter number of tree planted from 0 to 500k: "))
 
-train.input['rainfall_intensity'] = 60
-train.input['river_water_level'] = 27
-train.input['no_of_trees_planted'] = 500
+train.input['rainfall_intensity'] = 21
+train.input['river_water_level'] = 24.6
+train.input['no_of_trees_planted'] = 10
 
 # compute the outputs
 train.compute()
