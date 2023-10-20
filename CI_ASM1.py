@@ -24,7 +24,7 @@ no_of_trees_planted['few'] = fuzz.trimf(no_of_trees_planted.universe, [0, 1, 50]
 no_of_trees_planted['moderate'] = fuzz.trimf(no_of_trees_planted.universe, [51, 125, 250])
 no_of_trees_planted['many'] = fuzz.trapmf(no_of_trees_planted.universe, [251, 375, 500, 500])
 
-flood_warning_level['low'] = fuzz.trimf(flood_warning_level.universe, [1, 25, 50])
+flood_warning_level['low'] = fuzz.trimf(flood_warning_level.universe, [0, 25, 50])
 flood_warning_level['moderate'] = fuzz.trimf(flood_warning_level.universe, [20, 50, 80])
 flood_warning_level['high'] = fuzz.trimf(flood_warning_level.universe, [50, 100, 100])
 
