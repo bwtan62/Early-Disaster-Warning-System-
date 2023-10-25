@@ -72,8 +72,7 @@ rule28 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['alert']
 rule29 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['warning'] & no_of_trees_planted['many'], flood_warning_level['moderate'])
 rule30 = ctrl.Rule(rainfall_intensity['very heavy'] & river_water_level['danger'] & no_of_trees_planted['many'], flood_warning_level['high'])
 
-rules = [rule1, rule2, rule3, rule4, rule5,rule6, rule7, rule8, rule9, rule10, rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19, rule20,
-         rule21, rule22, rule23, rule24, rule25, rule26, rule27, rule28, rule29, rule30]
+rules = [rule1, rule2, rule3, rule4, rule5,rule6, rule7, rule8, rule9, rule10, rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19, rule20, rule21, rule22, rule23, rule24, rule25, rule26, rule27, rule28, rule29, rule30]
 
 # Construct the fuzzy control system
 flood_ctrl = ctrl.ControlSystem(rules=rules)
@@ -94,7 +93,8 @@ def flood_out(rainfall_intensity, river_water_level, no_of_trees_planted):
 
     # to extract one of the outputs
     print("Flood Warning Level: ", flood.output['flood_warning_level'])
-
+    print()
+    
     flood_warning_level.view(sim=flood)
 
 # 3D visualisation
@@ -140,12 +140,12 @@ print("Scenario 2:\nrain intensity = 21mm/h, river water level = 24.6 meter, num
 flood_out(21, 24.6, 10)
 
 # Scenario 3
-print("Scenario 3:\nrain intensity = 6mm/h, river water level = 23 meter, number of tree planted = 10k")
-flood_out(6, 23, 10)
+print("Scenario 3:\nrain intensity = 45mm/h, river water level = 26 meter, number of tree planted = 260k")
+flood_out(45, 26, 260)
 
 # Scenario 4
-print("Scenario 4:\nrain intensity = 6mm/h, river water level = 23 meter, number of tree planted = 10k")
-flood_out(6, 23, 10)
+print("Scenario 4:\nrain intensity = 65mm/h, river water level = 28 meter, number of tree planted = 510k")
+flood_out(65, 28, 510)
 
 # User input
 # ri = int(input("Please enter rain intensity from 0 to 60mm (0 >= 60): "))
